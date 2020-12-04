@@ -1,11 +1,3 @@
-.logo1{
-    float: left;
-    display: inline-block;
-    width: 200px;
-    margin-left:60px;
-   
-}
-
 h1{
     text-align: center; 
     font-size: 70px; 
@@ -35,8 +27,4 @@ body{
 
 .ulhomens{
     display: block;
-}
-
-li {
-  
 }

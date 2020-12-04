@@ -1,3 +1,7 @@
+table{
+    margin-top: 20px;
+}
+
 h1{
     text-align: center; 
     font-size: 70px; 
@@ -53,4 +57,42 @@ body{
     text-decoration: none;
     padding-top: 1px, 1px;
        background-color: rgb(155, 155, 155);
+}
+
+.botaoAlter{
+    background-color: rgb(182, 182, 182);
+    margin: 3px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: black;
+    border-radius: 2px;
+    padding: 1px;
+}
+
+.botaoDelete{
+    background-color: rgb(182, 182, 182);
+    margin: 3px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: black;
+    border-radius: 3px;
+    padding: 1px;
+}
+
+.botaoDelete:hover{
+    font-size: 16.2px;
+    background-color: rgb(138, 138, 138);
+}
+
+.botaoAlter:hover{
+    font-size: 16.2px;
+    background-color: rgb(199, 199, 199);
+}
+
+.delete-btn{
+    margin-right: 5px;
+}
+
+.acoes{
+    width: 120px;
 }
