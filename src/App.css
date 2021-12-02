@@ -1,0 +1,214 @@
+.App {
+  text-align: center;
+}
+
+.texto-inicial{
+  text-align: center;
+  font-style: italic;
+  font-size: 40px;
+}
+
+.texto-inicial1{
+  margin-top: 125px;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+h1 {
+  text-align: center; 
+  font-size: 70px; 
+  margin: auto;
+  color: rgb(0, 0, 0);
+  padding: 0px;
+}
+
+h2 {
+  text-align: center;
+  font-size: 40px;
+  margin: auto;
+  color: rgb(0, 0, 0);
+  padding: 0px;
+}
+
+.header {
+  background-image: linear-gradient(to bottom, #c3c1cc, rgb(73, 73, 73));
+}
+
+.login {
+  margin-top: 85px;
+}
+
+.btnLogin {
+  background-image: linear-gradient(to bottom, #c3c1cc, rgba(73, 73, 73, 0.65));
+  border-radius: 3px;
+  margin-top: -37px;
+  position: absolute;
+}
+
+.logadoComo{
+  float: right;
+  font-size: 12px;
+  margin-top: -30px;
+}
+
+.btnLogin:hover{
+  border-radius: 5px;
+  font-size: 17px;
+  margin-top: -37px;
+  transition: 150ms;
+  background-image: linear-gradient(to bottom, #c3c1cc, rgba(73, 73, 73, 0.849));
+}
+
+.footer {
+  background-image: linear-gradient(to bottom, #c3c1cc, rgba(0, 0, 0, 0.829));
+}
+
+.menu-tabs {
+  margin-top: 155px;
+}
+
+.delete-btn {
+  margin-left: 5px;
+}
+
+.div-login-body {
+  background-image: linear-gradient(to bottom, #d80e0e91, rgba(68, 0, 124, 0.801));
+  margin-top: -2.3%;
+  margin-left: 0px;
+}
+
+.div-login{
+  margin-top: 110px;
+  background-color: #008cff2a;
+  width: 55%;
+  margin-left: 25%;
+  border-radius: 10px;
+  height: 830px;
+  padding-top: 40px;
+}
+
+.labelLoginGroup {
+  font-size: 200%;
+  margin-top: 100px;
+  text-align: center;
+  font-weight: normal;
+  font-weight: bold;
+}
+
+.labelLoginGroup {
+  font-size: 200%;
+  margin-top: 100px;
+  text-align: center;
+}
+
+.labelLogin2{
+  margin-top: 15px;
+  margin-left: 25px;
+}
+
+.label1{
+  margin-right: 10px;
+}
+
+.label2{
+  margin-right: 10px;
+}
+
+.inputLogin{
+  color: #000000;
+  background:#f5f5f5ce;
+  border-width: medium;
+  border-style: solid;
+  border-color: rgb(0, 0, 0);
+  border-radius: 10px;
+}
+
+.btnEnviar{
+  background-color: #ffffffbe;
+  margin-left: 30px;
+  border-radius: 7px;
+  border-width: 3px;
+  border-color: #000000;
+  text-align: center;
+  width: 250px;
+  margin-top: 50px;
+  font-weight:600;
+}
+
+.btnEnviar:hover { 
+  background-color: #c8c8c8d7;
+  margin-left: 30px;
+  border-radius: 7px;
+  border-width: 3px;
+  border-color: #000000;
+  text-align: center;
+  width: 252px;
+  height: 57px;
+  margin-top: 50px;
+  font-weight:600;
+
+}
+
+.btnLogout{
+  margin-left: 90px;
+  margin-top: -31px;
+}
+
+.spanLogin{
+  font-size: 60%;
+  font-weight: 600;
+  font-style: oblique;
+  color: rgb(182, 0, 0);
+  margin-left: 50%;
+}
+
+.spanStatus{
+  font-size: 120%;
+  color: #1efd00c4;
+  font-weight: 600;
+  font-style: oblique;
+  margin-left: 50%;
+  margin-bottom: 100%;
+}
+
+.spanStatusBlock{
+  font-size: 150%;
+  color: #da03039a;
+  font-weight: 600;
+  font-style: oblique;
+  margin-left: 50%;
+  margin-bottom: 100%;
+}
