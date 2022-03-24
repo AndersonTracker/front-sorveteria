@@ -41,6 +41,14 @@ export default class ProductListPage extends Component {
     });
   }
 
+  setModalModeToAddEstoque = (product) => {
+    this.setState({
+      openModal: true,
+      modalMode: 'AddEstoque',
+      modalProduct: product
+    });
+  }
+
   setModalModeToDelete = (product) => {
     this.setState({
       openModal: true,
@@ -75,7 +83,7 @@ export default class ProductListPage extends Component {
           </thead>
           <tbody>
             {this.state.products.map(product => {
-              return <ProductRow key={product.id} product={product} actionEdit={this.setModalModeToEdit} actionDelete={this.setModalModeToDelete} />;
+              return <ProductRow key={product.id} product={product} actionEdit={this.setModalModeToEdit} actionDelete={this.setModalModeToDelete} actionProductAddEstoque={this.setModalModeToAddEstoque}/>;
             })}
           </tbody>
         </table>

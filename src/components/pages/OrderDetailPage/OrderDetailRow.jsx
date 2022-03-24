@@ -8,6 +8,7 @@ export default class OrderDetailRow extends Component {
     render() {
         return (
             <tr>
+                <td>{this.props.orderDetail.order_item_id}</td>
                 <td>{this.props.orderDetail.employee_name}</td>
                 <td>{this.props.orderDetail.client_name}</td>
                 <td>{this.props.orderDetail.ice_cream_name}</td>

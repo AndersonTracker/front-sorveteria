@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import DeleteBtn from '../btns/DeleteBtn';
 import EditBtn from '../btns/EditBtn';
+import PrductAdd from '../btns/PrductAdd';
 
 export default class ProductRow extends Component {
 
@@ -15,6 +16,7 @@ export default class ProductRow extends Component {
                 <td>
                     <EditBtn onClick={()=>this.props.actionEdit(this.props.product)}/>
                     <DeleteBtn onClick={()=>this.props.actionDelete(this.props.product)}/>
+                    <PrductAdd onClick={()=>this.props.actionProductAddEstoque(this.props.product)}/>
                 </td>
             </tr>
         );

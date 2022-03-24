@@ -206,9 +206,15 @@ h2 {
 
 .spanStatusBlock{
   font-size: 150%;
-  color: #da03039a;
+  color: rgb(182, 0, 0);
   font-weight: 600;
   font-style: oblique;
   margin-left: 50%;
   margin-bottom: 100%;
+}
+
+#spanIdError{
+  font-weight: 1000;
+  text-size-adjust: 10px;
+  color: red;
 }

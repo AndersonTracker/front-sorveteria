@@ -30,7 +30,7 @@ import {useHistory} from 'react-router-dom';
                 localStorage.setItem('attempts', valor);
                 {valor === 0 ? (
                 setSpan("sistema bloqueado.")
-                ): setSpan("senha invalida, tentativas " + localStorage.getItem('attempts') + ".");}
+                ): setSpan("login invalido, tentativas: " + localStorage.getItem('attempts') + ".");}
             }
         }
         validation(token);
@@ -49,6 +49,14 @@ import {useHistory} from 'react-router-dom';
             ...values,
             [name]: value,
         });
+    }
+
+    function onChangePassword(event) {  
+        const {value, name} = event.target;
+        setValues({
+            ...values,
+            [name]: value,
+        });  
     }
 
     function onSubmit(event){
@@ -132,7 +140,7 @@ import {useHistory} from 'react-router-dom';
                                 </div>
                                 <div className="labelLogin2">
                                     <label className="label2" htmlFor="password">Senha</label>
-                                    <input className="inputLogin" id="password" type="password" name="password" onChange={onChange} value={values.password} required/>
+                                    <input className="inputLogin" id="password" type="password" name="password" onChange={onChangePassword} value={values.password} required/>
                                     <span>{}</span>
                                 </div>
                                 <input className="btnEnviar" type="submit" value="Login"/>

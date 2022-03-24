@@ -8,7 +8,6 @@ export default class ProfitRow extends Component {
     render() {
         return (
             <tr>
-                <th scope="row">{this.props.profit.id}</th>
                 <td>{this.props.profit.idOrders}</td>
                 <td>{this.props.profit.amountTotalProfit}</td>
                 <td>{this.props.profit.profitDate}</td>

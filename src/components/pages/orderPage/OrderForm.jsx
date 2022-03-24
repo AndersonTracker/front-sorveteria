@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import Modal from 'react-bootstrap/Modal'
 import CancelBtn from '../btns/CancelBtn';
 import SaveBtn from '../btns/SaveBtn';
@@ -17,7 +17,7 @@ export default class OrderForm extends Component {
             totalAmount: ""
         };
     }
-
+    
     componentWillReceiveProps(nextProps) {
         this.setState({
             id: nextProps.order.id,
@@ -30,30 +30,34 @@ export default class OrderForm extends Component {
         });
     }
     onSave = () => {
-        if (this.props.mode == 'edit') {
-            fetch("http://localhost:8080/webapp/rest/orders/" + this.state.id,
-                {
-                    method: "PUT",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(this.state)
-                }).then(() => {
-                    this.clearState();
-                    this.props.toggleModal();
-                });
-        } else {
-            fetch("http://localhost:8080/webapp/rest/orders",
-                {
-                    method: "POST",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(this.state)
-                }).then(() => {
-                    this.clearState();
-                    this.props.toggleModal();
-                });
+        if(this.state.itemQuantity > 0){
+            if (this.props.mode == 'edit') {
+                fetch("http://localhost:8080/webapp/rest/orders/" + this.state.id,
+                    {
+                        method: "PUT",
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(this.state)
+                    }).then(() => {
+                        this.clearState();
+                        this.props.toggleModal();
+                    });
+            }else{
+                fetch("http://localhost:8080/webapp/rest/orders",
+                    {
+                        method: "POST",
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(this.state)
+                    }).then(() => {
+                        this.clearState();
+                        this.props.toggleModal();
+                    });
+            }
+        }else{
+            document.getElementById("spanIdError").textContent="* valor invalido";
         }
     }
 
@@ -116,9 +120,6 @@ export default class OrderForm extends Component {
 
                             <label htmlFor="order-itemQuantity">Quantidade comprada</label>
                             <input id="order-itemQuantity" name="itemQuantity" type="number" step="1" className="form-control" value={this.state.itemQuantity} placeholder="1" onChange={this.handleInputChange} required disabled />
-
-                            <label htmlFor="order-totalAmount">total a pagar</label>
-                            <input id="order-totalAmount" name="totalAmount" type="number" step="0.01" className="form-control" value={this.state.unityAmount} placeholder="1" onChange={this.handleInputChange} required disabled /> 
                             
                         </form>
                     </Modal.Body>
@@ -150,14 +151,11 @@ export default class OrderForm extends Component {
                             <label htmlFor="order-iceCreamId">ID do Produto</label>
                             <input id="order-iceCreamId" name="iceCreamId" type="text" className="form-control" value={this.state.iceCreamId} placeholder="1" onChange={this.handleInputChange} required/>
 
-                            <label htmlFor="order-itemQuantity">Quantidade comprada</label>
+                            <label htmlFor="order-itemQuantity">Quantidade comprada <span id="spanIdError"> </span></label>
                             <input id="order-itemQuantity" name="itemQuantity" type="number" step="1" className="form-control" value={this.state.itemQuantity} placeholder="1" onChange={this.handleInputChange} required/>
 
                             <label htmlFor="order-unityAmount">valor por unidade</label>
-                            <input id="order-unityAmount" name="unityAmount" type="number" step="0.01" className="form-control" value={this.state.unityAmount} placeholder="1" onChange={this.handleInputChange} required/> 
-
-                            <label htmlFor="order-totalAmount">total a pagar</label>
-                            <input id="order-totalAmount" name="totalAmount" type="number" step="0.01" className="form-control" value={this.state.unityAmount} placeholder="1" onChange={this.handleInputChange} disabled /> 
+                            <input id="order-unityAmount" name="unityAmount" type="number" step="0.01" className="form-control" value={this.state.unityAmount} placeholder="1" onChange={this.handleInputChange} disabled/> 
                         </form>
                     </Modal.Body>
 
@@ -185,11 +183,9 @@ export default class OrderForm extends Component {
                             <label htmlFor="order-iceCreamId">ID do Produto</label>
                             <input id="order-iceCreamId" name="iceCreamId" type="text" className="form-control" value={this.state.iceCreamId} placeholder="1" onChange={this.handleInputChange} required/>
 
-                            <label htmlFor="order-itemQuantity">Quantidade comprada</label>
+                            <label htmlFor="order-itemQuantity">Quantidade comprada <span id="spanIdError"> </span></label>
                             <input id="order-itemQuantity" name="itemQuantity" type="number" step="1" className="form-control" value={this.state.itemQuantity} placeholder="1" onChange={this.handleInputChange} required/>
 
-                            <label htmlFor="order-unityAmount">valor por unidade</label>
-                            <input id="order-unityAmount" name="unityAmount" type="number" step="0.01" className="form-control" value={this.state.unityAmount} placeholder="1" onChange={this.handleInputChange} required/> 
                         </form>
                     </Modal.Body>
 

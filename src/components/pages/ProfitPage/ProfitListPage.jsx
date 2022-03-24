@@ -37,7 +37,6 @@ export default class ProfitListPage extends Component {
         <table className="table table-bordered">
           <thead>
             <tr>
-              <th scope="col">#</th>
               <th scope="col">id do pedido</th>
               <th scope="col">lucro total</th>
               <th scope="col">data da venda</th>
@@ -45,12 +44,12 @@ export default class ProfitListPage extends Component {
           </thead>
           <tbody>
             {this.state.profits.map(profit => {
-                return <ProfitRow key={profit.id} profit={profit} actionEdit={this.setModalModeToEdit} actionDelete={this.setModalModeToDelete}/>;
+                return <ProfitRow key={profit.idOrders} profit={profit} actionEdit={this.setModalModeToEdit} actionDelete={this.setModalModeToDelete}/>;
 
             })}
           </tbody>
-              <p>valor total = <span scope="col" id="valorTotal" >{this.state.profitTotal.toFixed(2)}</span></p>
         </table>
+              <p>valor total = <span scope="col" id="valorTotal" >{this.state.profitTotal.toFixed(2)}</span></p>
       </>
     )
   }

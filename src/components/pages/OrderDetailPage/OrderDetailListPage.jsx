@@ -29,6 +29,7 @@ export default class OrderDetailListPage extends Component {
         <table className="table table-bordered">
           <thead>
             <tr>
+              <th scope="col">id do pedido</th>
               <th scope="col">Funcionario</th>
               <th scope="col">Cliente</th>
               <th scope="col">Produto</th>
@@ -39,7 +40,7 @@ export default class OrderDetailListPage extends Component {
           </thead>
           <tbody>
             {this.state.ordersDetails.map(orderDetail => {
-              return <OrderDetailRow key={orderDetail.id} orderDetail={orderDetail} actionEdit={this.setModalModeToEdit} actionDelete={this.setModalModeToDelete}/>;
+              return <OrderDetailRow key={orderDetail.order_item_id} orderDetail={orderDetail} actionEdit={this.setModalModeToEdit} actionDelete={this.setModalModeToDelete}/>;
             })}
           </tbody>
         </table>

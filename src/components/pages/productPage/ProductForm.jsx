@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Modal from 'react-bootstrap/Modal'
+import Modal from 'react-bootstrap/Modal';
 import CancelBtn from '../btns/CancelBtn';
 import SaveBtn from '../btns/SaveBtn';
 import DeleteBtn from '../btns/DeleteBtn';
@@ -12,7 +12,8 @@ export default class ProductForm extends Component {
             name: "",
             desc: "",
             price: "",
-            quantity: ""
+            quantity: "",
+            quantityComprada: ""
         };
     }
 
@@ -23,6 +24,7 @@ export default class ProductForm extends Component {
             desc: nextProps.product.desc,
             price: nextProps.product.price,
             quantity: nextProps.product.quantity,
+            quantityComprada: nextProps.product.quantityComprada,
         });
     }
     onSave = () => {
@@ -38,7 +40,19 @@ export default class ProductForm extends Component {
                     this.clearState();
                     this.props.toggleModal();
                 });
-        } else {
+            }else if (this.props.mode == 'AddEstoque') {
+                    fetch("http://localhost:8080/webapp/rest/ice-cream/addEstoque/" + this.state.id,
+                        {
+                            method: "PUT",
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(this.state)
+                        }).then(() => {
+                            this.clearState();
+                            this.props.toggleModal();
+                        });
+            } else {
             fetch("http://localhost:8080/webapp/rest/ice-cream",
                 {
                     method: "POST",
@@ -74,7 +88,8 @@ export default class ProductForm extends Component {
             name: "",
             desc: "",
             price: "",
-            quantity: ""
+            quantity: "",
+            quantityComprada: ""
         });
     }
 
@@ -145,6 +160,40 @@ export default class ProductForm extends Component {
                             <label htmlFor="product-quantity">quantidade</label>
                             <input id="product-quantity" name="quantity" type="number" className="form-control" value={this.state.quantity} placeholder="1" onChange={this.handleInputChange} required />
         
+                        </form>
+                    </Modal.Body>
+
+                    <Modal.Footer>
+                        <CancelBtn onClick={this.onCancel} />
+                        <SaveBtn onClick={this.onSave} />
+                    </Modal.Footer>
+                </Modal>
+            );
+        }else if(this.props.mode === 'AddEstoque') {
+            return (
+                <Modal show={this.props.show} onHide={this.onCancel}>
+                    <Modal.Header>
+                        <Modal.Title>Adicionado Estoque</Modal.Title>
+                    </Modal.Header>
+
+                    <Modal.Body>
+                        <form id="product-form">
+
+                        <label htmlFor="product-name">name</label>
+                            <input id="product-name" name="name" type="text" className="form-control" value={this.state.name} placeholder="Sorvete" onChange={this.handleInputChange} required disabled/>
+
+                            <label htmlFor="product-desc">Descrição</label>
+                            <input id="product-desc" name="desc" type="text" className="form-control" value={this.state.desc} placeholder="Sorvete de Limão" onChange={this.handleInputChange} required disabled/>
+
+                            <label htmlFor="product-price">preço</label>
+                            <input id="product-price" name="price" type="number" step="0.01" className="form-control" value={this.state.price} placeholder="19.99" onChange={this.handleInputChange} required disabled/>
+
+                            <label htmlFor="product-quantity">quantidade</label>
+                            <input id="product-quantity" name="quantity" type="number" className="form-control" value={this.state.quantity} placeholder="1" onChange={this.handleInputChange} required disabled/>
+
+                            <label htmlFor="product-quantityComprada">quantidade comprada</label>
+                            <input id="product-quantityComprada" name="quantityComprada" type="number" className="form-control" value={this.state.quantityComprada} placeholder="1" onChange={this.handleInputChange} required />
+
                         </form>
                     </Modal.Body>
 
