@@ -173,7 +173,7 @@ export default class ProductForm extends Component {
             return (
                 <Modal show={this.props.show} onHide={this.onCancel}>
                     <Modal.Header>
-                        <Modal.Title>Adicionado Estoque</Modal.Title>
+                        <Modal.Title>Adicionando Estoque</Modal.Title>
                     </Modal.Header>
 
                     <Modal.Body>

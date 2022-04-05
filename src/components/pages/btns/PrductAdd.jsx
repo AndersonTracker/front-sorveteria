@@ -7,8 +7,7 @@ export default class PrductAdd extends Component {
 
     render() {
         return (
-            <button type="button" onClick={this.props.onClick} className="btn btn-outline-success"
-            onClick={this.props.onClick}>
+            <button type="button" onClick={this.props.onClick} className="btn btn-outline-success">
                 Atualizar estoque
             </button>
         );

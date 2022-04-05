@@ -24,7 +24,7 @@ export default class StoreForm extends Component {
         });
     }
     onSave = () => {
-        if(this.state.phone.length == 15){
+        if(this.state.phone.length >= 10){
             if (this.props.mode == 'edit') {
                 fetch("http://localhost:8080/webapp/rest/stores/" + this.state.id,
                 {
