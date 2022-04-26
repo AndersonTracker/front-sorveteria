@@ -6,7 +6,7 @@ import {useHistory} from 'react-router-dom';
     
     const LoginPage = () => {
     const [span, setSpan] = useState('');
-    const [block, setBlock] = useState('');
+    const [block, setBlock] = useState();
     const {user, setUser } = React.useContext(Context);
     const [usuario, setUsurio] = useState('');
     const [values, setValues] = useState(initialState);
@@ -16,7 +16,7 @@ import {useHistory} from 'react-router-dom';
     function login(usuario, senha, systemLocked){
         // teste
         if(localStorage.getItem('attempts') > 0){
-            if(usuario !== undefined && senha !== undefined && systemLocked !== 'false'){
+            if(usuario !== undefined && senha !== undefined && systemLocked !== false){
                 token = 'true';
                 setUser({name: usuario});
                 localStorage.setItem('attempts', 3);
@@ -24,13 +24,16 @@ import {useHistory} from 'react-router-dom';
                 if(localStorage.getItem('attempts') == 1){
                     blocked();
             }
-                token = 'false';
-                var valor = localStorage.getItem('attempts');
-                valor--;
-                localStorage.setItem('attempts', valor);
-                {valor === 0 ? (
-                setSpan("sistema bloqueado.")
-                ): setSpan("login invalido, tentativas: " + localStorage.getItem('attempts') + ".");}
+                if(usuario !== undefined && systemLocked === false){
+                    setSpan("usuario bloqueado.");
+                }else{
+                    var valor = localStorage.getItem('attempts');
+                    valor--;
+                    localStorage.setItem('attempts', valor);
+                    {valor === 0 ? (
+                    setSpan("sistema bloqueado.")
+                    ): setSpan("login invalido, tentativas: " + localStorage.getItem('attempts') + ".");}
+                }
             }
         }
         validation(token);
@@ -114,6 +117,7 @@ import {useHistory} from 'react-router-dom';
         }).then(response => {
             return response.json()
         }).then(r => {
+            console.log(r.systemLocked);
             setBlock(r.systemLocked);
           });
     }
