@@ -29,13 +29,13 @@ export default class OrderDetailListPage extends Component {
         <table className="table table-bordered">
           <thead>
             <tr>
-              <th scope="col">id do pedido</th>
+              <th scope="col">id pedido</th>
               <th scope="col">Funcionario</th>
               <th scope="col">Cliente</th>
               <th scope="col">Produto</th>
               <th scope="col">quantidade comprada</th>
-              <th scope="col">preço por unidade</th>
-              <th scope="col">total a pagar</th>
+              <th scope="col">preço unitario</th>
+              <th scope="col">total</th>
             </tr>
           </thead>
           <tbody>

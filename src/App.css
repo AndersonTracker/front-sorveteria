@@ -93,6 +93,7 @@ h2 {
 }
 
 .footer {
+  margin-top: 10px;
   background-image: linear-gradient(to bottom, #c3c1cc, rgba(0, 0, 0, 0.829));
 }
 
@@ -214,6 +215,18 @@ h2 {
 }
 
 #spanIdError{
+  font-weight: 1000;
+  text-size-adjust: 10px;
+  color: red;
+}
+
+#spanIdErrorName{
+  font-weight: 1000;
+  text-size-adjust: 10px;
+  color: red;
+}
+
+#spanIdErrorAdress{
   font-weight: 1000;
   text-size-adjust: 10px;
   color: red;

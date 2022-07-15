@@ -24,35 +24,43 @@ export default class StoreForm extends Component {
         });
     }
     onSave = () => {
-        if(this.state.phone.length >= 10){
-            if (this.props.mode == 'edit') {
-                fetch("http://localhost:8080/webapp/rest/stores/" + this.state.id,
-                {
-                    method: "PUT",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(this.state)
-                }).then(() => {
-                    this.clearState();
-                    this.props.toggleModal();
-                });
-            } else {
-                console.log(JSON.stringify(this.state));
-                fetch("http://localhost:8080/webapp/rest/stores",
-                    {
-                        method: "POST",
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(this.state)
-                    }).then(() => {
-                        this.clearState();
-                        this.props.toggleModal();
-                    });
-            }
+        if(this.state.address == null || this.state.address.length < 15){
+            document.getElementById("spanIdErrorAdress").textContent="* valor invalido";
         }else{
-            document.getElementById("spanIdError").textContent="* valor invalido";
+            if(this.state.name == null || this.state.name.length < 3){
+                document.getElementById("spanIdErrorName").textContent="* valor invalido";
+            }else{
+                if(this.state.phone == null || this.state.phone.length <= 10){
+                    document.getElementById("spanIdError").textContent="* valor invalido";
+                }else{
+                    if (this.props.mode == 'edit') {
+                        fetch("http://localhost:8080/webapp/rest/stores/" + this.state.id,
+                        {
+                            method: "PUT",
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(this.state)
+                        }).then(() => {
+                            this.clearState();
+                            this.props.toggleModal();
+                        });
+                    } else {
+                        console.log(JSON.stringify(this.state));
+                        fetch("http://localhost:8080/webapp/rest/stores",
+                            {
+                                method: "POST",
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(this.state)
+                            }).then(() => {
+                                this.clearState();
+                                this.props.toggleModal();
+                            });
+                    }
+                }
+            }  
         }
     }
 
@@ -87,6 +95,21 @@ export default class StoreForm extends Component {
         this.setState({
             [name]: value
         });
+        if(this.state.address == null || this.state.address.length < 15){
+            document.getElementById("spanIdErrorAdress").textContent="* campo obrigatorio";
+        }else{
+            document.getElementById("spanIdErrorAdress").textContent="";
+        }
+        if(this.state.name == null || this.state.name.length < 2){
+            document.getElementById("spanIdErrorName").textContent="* campo obrigatorio";
+        }else{
+            document.getElementById("spanIdErrorName").textContent="";
+        }
+        if(this.state.phone == null || this.state.phone.length <= 10){
+            document.getElementById("spanIdError").textContent="* campo obrigatorio";
+        }else{
+            document.getElementById("spanIdError").textContent="";
+        }
     }
 
     render() {
@@ -131,10 +154,10 @@ export default class StoreForm extends Component {
                             <label htmlFor="store-id">ID</label>
                             <input id="store-id" name="id" type="text" className="form-control" value={this.state.id} placeholder="#" onChange={this.handleInputChange} disabled />
 
-                            <label htmlFor="store-name">Nome</label>
+                            <label htmlFor="store-name">Nome <span id="spanIdErrorName"></span></label>
                             <input id="store-name" name="name" type="text" className="form-control" value={this.state.name} placeholder="Anderson Silva" onChange={this.handleInputChange} required />
 
-                            <label htmlFor="store-address">Endereço</label>
+                            <label htmlFor="store-address">Endereço <span id="spanIdErrorAdress"></span></label>
                             <input id="store-address" name="address" type="text" className="form-control" value={this.state.address} placeholder="Rua das Palmeiras, 123, Bairro X" onChange={this.handleInputChange} required />
 
                             <label htmlFor="store-phone">Telefone <span id="spanIdError"> </span></label>
@@ -157,10 +180,10 @@ export default class StoreForm extends Component {
 
                     <Modal.Body>
                         <form id="store-form">
-                            <label htmlFor="store-name">Nome</label>
-                            <input id="store-name" name="name" type="text" className="form-control" value={this.state.name} placeholder="Anderson Silva" onChange={this.handleInputChange} required />
+                            <label htmlFor="store-name">Nome <span id="spanIdErrorName"></span></label>
+                            <input id="store-name" name="name" type="text" className="form-control" value={this.state.name} placeholder="Anderson Silva" onChange={this.handleInputChange}/>
 
-                            <label htmlFor="store-address">Endereço</label>
+                            <label htmlFor="store-address">Endereço<span id="spanIdErrorAdress"></span></label>
                             <input id="store-address" name="address" type="text" className="form-control" value={this.state.address} placeholder="Rua das Palmeiras, 123, Bairro X" onChange={this.handleInputChange} required />
 
                             <label htmlFor="store-phone">Telefone <span id="spanIdError"> </span></label>

@@ -107,19 +107,23 @@ import {useHistory} from 'react-router-dom';
     }
     
     function renderizar(){
-        fetch("http://localhost:8080/webapp/rest/login",
-        {
-            method: "GET",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify()
-        }).then(response => {
-            return response.json()
-        }).then(r => {
-            console.log(r.systemLocked);
-            setBlock(r.systemLocked);
-          });
+        try{
+            fetch("http://localhost:8080/webapp/rest/login",
+            {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify()
+            }).then(response => {
+                return response.json()
+            }).then(r => {
+                console.log(r.systemLocked);
+                setBlock(r.systemLocked);
+              });  
+        }catch(e){
+            e.printStackTrace();
+        }
     }
     
     useEffect(() => { 
