@@ -9,7 +9,7 @@ export default class OrderRow extends Component {
             <tr>
                 <th scope="row">{this.props.order.id}</th>
                 <td>{this.props.order.employeeId}</td>
-                <td>{this.props.order.clientId}</td>
+                <td>{this.props.order.clientName}</td>
                 <td>{this.props.order.iceCreamId}</td>
                 <td>{this.props.order.itemQuantity}</td>
                 <td>{this.props.order.unityAmount}</td>

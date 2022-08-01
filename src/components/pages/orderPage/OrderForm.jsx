@@ -4,13 +4,15 @@ import CancelBtn from '../btns/CancelBtn';
 import SaveBtn from '../btns/SaveBtn';
 import DeleteBtn from '../btns/DeleteBtn';
 
+var quantidadePositiva = 0;
+
 export default class OrderForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
             id: "",
             employeeId: "",
-            clientId: "",
+            clientName: "",
             iceCreamId: "",
             itemQuantity: "",
             unityAmount: "",
@@ -22,45 +24,73 @@ export default class OrderForm extends Component {
         this.setState({
             id: nextProps.order.id,
             employeeId: nextProps.order.employeeId,
-            clientId: nextProps.order.clientId,
+            clientName: nextProps.order.clientName,
             iceCreamId: nextProps.order.iceCreamId,
             itemQuantity: nextProps.order.itemQuantity,
             unityAmount: nextProps.order.unityAmount,
             totalAmount: nextProps.order.totalAmount
         });
     }
+    
     onSave = () => {
-        if(this.state.itemQuantity > 0){
-            if (this.props.mode == 'edit') {
-                fetch("http://localhost:8080/webapp/rest/orders/" + this.state.id,
-                    {
-                        method: "PUT",
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(this.state)
-                    }).then(() => {
-                        this.clearState();
-                        this.props.toggleModal();
-                    });
-            }else{
-                fetch("http://localhost:8080/webapp/rest/orders",
-                    {
-                        method: "POST",
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(this.state)
-                    }).then(() => {
-                        this.clearState();
-                        this.props.toggleModal();
-                    });
-            }
+        document.getElementById("spanIdErrorQuantity").textContent="";
+        document.getElementById("spanIdErrorEmployee").textContent="";
+        document.getElementById("spanIdErrorClient").textContent="";
+        document.getElementById("spanIdErrorIceCream").textContent="";
+        if(this.state.itemQuantity == null || this.state.itemQuantity.length <= 0){
+            document.getElementById("spanIdErrorQuantity").textContent="* quantidade invalida";
+        }else if(this.state.employeeId == null || this.state.employeeId == ""){
+            document.getElementById("spanIdErrorEmployee").textContent="* campo invalido";
+        }else if(this.state.clientName == null || this.state.clientName == ""){
+            document.getElementById("spanIdErrorClient").textContent="* campo invalido";
+        }else if(this.state.iceCreamId == null || this.state.iceCreamId == ""){
+
+            document.getElementById("spanIdErrorIceCream").textContent="* campo invalido";
         }else{
-            document.getElementById("spanIdError").textContent="* valor invalido";
+            if(this.state.itemQuantity <= quantidadePositiva){
+                if (this.props.mode == 'edit') {
+                    fetch("http://localhost:8080/webapp/rest/orders/" + this.state.id,
+                        {
+                            method: "PUT",
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(this.state)
+                        }).then((response) => {
+                            if(response.status == 204){
+                                this.clearState();
+                                this.props.toggleModal();
+                            }else{
+                                throw new Error();
+                            }
+                        }).catch((error) => {
+                            document.getElementById("spanIdErrorClient").textContent="cliente não existente";
+                        });
+                }else{
+                    fetch("http://localhost:8080/webapp/rest/orders",
+                        {
+                            method: "POST",
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(this.state)
+                        }).then((response) => {
+                            if(response.status == 204){
+                                this.clearState();
+                                this.props.toggleModal();
+                            }else{
+                                throw new Error();
+                            }
+                        }).catch((error) => {
+                            document.getElementById("spanIdErrorClient").textContent="cliente não existente";
+                        });
+                }
+            }else{
+                document.getElementById("spanIdErrorQuantity").textContent="* quantidade excedida !! quantidade em estoque: " + quantidadePositiva;  
+            }           
         }
     }
-
+    
     onDelete = () => {
         fetch("http://localhost:8080/webapp/rest/orders/" + this.state.id,
             {
@@ -79,7 +109,7 @@ export default class OrderForm extends Component {
     clearState = () => {
         this.setState(this.state = {
             employeeId: "",
-            clientId: "",
+            clientName: "",
             iceCreamId: "",
             itemQuantity: "",
             unityAmount: "",
@@ -88,6 +118,15 @@ export default class OrderForm extends Component {
     }
 
     handleInputChange = (event) => {
+        if(this.state.itemQuantity != null || this.state.itemQuantity == ""){
+            fetch("http://localhost:8080/webapp/rest/ice-cream/addEstoque/" + this.state.iceCreamId)
+            .then(function(response){
+                return response.json();
+            }).then(function(data){
+                quantidadePositiva = data.quantity;
+                alert(quantidadePositiva); 
+            });
+        }
         let target = event.target;
         let value = target.value;
         let name = target.name;
@@ -112,8 +151,8 @@ export default class OrderForm extends Component {
                             <label htmlFor="order-employeeId">ID do Funcionario</label>
                             <input id="order-employeeId" name="employeeId" type="text" className="form-control" value={this.state.employeeId} placeholder="001" onChange={this.handleInputChange} required disabled />
 
-                            <label htmlFor="order-clientId">ID do Cliente</label>
-                            <input id="order-clientId" name="clientId" type="text" className="form-control" value={this.state.clientId} placeholder="001" onChange={this.handleInputChange} required disabled />
+                            <label htmlFor="order-clientName">Nome do Cliente</label>
+                            <input id="order-clientName" name="clientName" type="text" className="form-control" value={this.state.clientName} placeholder="001" onChange={this.handleInputChange} required disabled />
 
                             <label htmlFor="order-iceCreamId">ID do Produto</label>
                             <input id="order-iceCreamId" name="iceCreamId" type="text" className="form-control" value={this.state.iceCreamId} placeholder="1" onChange={this.handleInputChange} required disabled />
@@ -142,16 +181,16 @@ export default class OrderForm extends Component {
                             <label htmlFor="order-id">ID</label>
                             <input id="order-id" name="id" type="text" className="form-control" value={this.state.id} placeholder="#" onChange={this.handleInputChange} disabled />
 
-                            <label htmlFor="order-c">ID do Funcionario</label>
+                            <label htmlFor="order-c">ID do Funcionario <span id="spanIdErrorEmployee"></span></label>
                             <input id="order-employeeId" name="employeeId" type="text" className="form-control" value={this.state.employeeId} placeholder="001" onChange={this.handleInputChange} required />
 
-                            <label htmlFor="order-clientId">ID do Cliente</label>
-                            <input id="order-clientId" name="clientId" type="text" className="form-control" value={this.state.clientId} placeholder="001" onChange={this.handleInputChange} required />
+                            <label htmlFor="order-clientName">Nome do Cliente <span id="spanIdErrorClient"></span></label>
+                            <input id="order-clientName" name="clientName" type="text" className="form-control" value={this.state.clientName} placeholder="001" onChange={this.handleInputChange} required />
                         
-                            <label htmlFor="order-iceCreamId">ID do Produto</label>
+                            <label htmlFor="order-iceCreamId">ID do Produto <span id="spanIdErrorIceCream"></span></label>
                             <input id="order-iceCreamId" name="iceCreamId" type="text" className="form-control" value={this.state.iceCreamId} placeholder="1" onChange={this.handleInputChange} required/>
 
-                            <label htmlFor="order-itemQuantity">Quantidade comprada <span id="spanIdError"> </span></label>
+                            <label htmlFor="order-itemQuantity">Quantidade comprada <span id="spanIdErrorQuantity"> </span></label>
                             <input id="order-itemQuantity" name="itemQuantity" type="number" step="1" className="form-control" value={this.state.itemQuantity} placeholder="1" onChange={this.handleInputChange} required/>
 
                             <label htmlFor="order-unityAmount">valor por unidade</label>
@@ -165,7 +204,7 @@ export default class OrderForm extends Component {
                     </Modal.Footer>
                 </Modal>
             );
-        } else {
+        }else {
             return (
                 <Modal show={this.props.show} onHide={this.onCancel}>
                     <Modal.Header>
@@ -174,16 +213,16 @@ export default class OrderForm extends Component {
 
                     <Modal.Body>
                         <form id="order-form">
-                            <label htmlFor="order-employeeId">ID do Funcionario</label>
+                            <label htmlFor="order-employeeId">ID do Funcionario <span id="spanIdErrorEmployee"></span></label>
                             <input id="order-employeeId" name="employeeId" type="text" className="form-control" value={this.state.employeeId} placeholder="001" onChange={this.handleInputChange} required />
 
-                            <label htmlFor="order-clientId">ID do Cliente</label>
-                            <input id="order-clientId" name="clientId" type="text" className="form-control" value={this.state.clientId} placeholder="001" onChange={this.handleInputChange} required />
+                            <label htmlFor="order-clientName">Nome do Cliente <span id="spanIdErrorClient"></span></label>
+                            <input id="order-clientName" name="clientName" type="text" className="form-control" value={this.state.clientName} placeholder="jOÃO" onChange={this.handleInputChange} required />
                         
-                            <label htmlFor="order-iceCreamId">ID do Produto</label>
+                            <label htmlFor="order-iceCreamId">ID do Produto <span id="spanIdErrorIceCream"></span></label>
                             <input id="order-iceCreamId" name="iceCreamId" type="text" className="form-control" value={this.state.iceCreamId} placeholder="1" onChange={this.handleInputChange} required/>
 
-                            <label htmlFor="order-itemQuantity">Quantidade comprada <span id="spanIdError"> </span></label>
+                            <label htmlFor="order-itemQuantity">Quantidade comprada <span id="spanIdErrorQuantity"> </span></label>
                             <input id="order-itemQuantity" name="itemQuantity" type="number" step="1" className="form-control" value={this.state.itemQuantity} placeholder="1" onChange={this.handleInputChange} required/>
 
                         </form>

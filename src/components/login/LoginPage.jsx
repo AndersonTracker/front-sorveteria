@@ -23,7 +23,7 @@ import {useHistory} from 'react-router-dom';
             }else{
                 if(localStorage.getItem('attempts') == 1){
                     blocked();
-            }
+                }
                 if(usuario !== undefined && systemLocked === false){
                     setSpan("usuario bloqueado.");
                 }else{
@@ -71,6 +71,14 @@ import {useHistory} from 'react-router-dom';
         if(token === 'true'){
             setToken(token);
             setUsurio(values.user);
+            fetch("http://localhost:8080/webapp/rest/logs",
+                {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({desc: " USUARIO " + values.user + " logado"})
+                });
             return History.push('/home');
         }
         setValues(initialState);
@@ -125,6 +133,10 @@ import {useHistory} from 'react-router-dom';
             e.printStackTrace();
         }
     }
+
+    function CadastrarNovoUser(){
+        return History.push('/newUser');
+    }
     
     useEffect(() => { 
         renderizar();
@@ -152,8 +164,9 @@ import {useHistory} from 'react-router-dom';
                                     <span>{}</span>
                                 </div>
                                 <input className="btnEnviar" type="submit" value="Login"/>
-                            </div>
-                            
+                                <p></p>
+                        <input className="btnEnviarCreateUser" onClick={CadastrarNovoUser} value="Cadastrar novo usuario"/>
+                            </div> 
                         </form>
                     </div>
                 </div>

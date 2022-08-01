@@ -158,29 +158,38 @@ h2 {
 }
 
 .btnEnviar{
-  background-color: #ffffffbe;
+  background-color: #ffffffce;
   margin-left: 30px;
   border-radius: 7px;
   border-width: 3px;
   border-color: #000000;
   text-align: center;
   width: 250px;
-  margin-top: 50px;
+  margin-top: 20px;
   font-weight:600;
+}
+
+.btnEnviarCreateUser{
+  background-color: #ffffffbe;
+  margin-left: 30px;
+  border-radius: 6px;
+  border-width: 2px;
+  border-color: #000000;
+  text-align: center;
+  font-weight:400;
+  font-size: 20px;
+}
+
+.btnEnviarCreateUser:hover { 
+  background-color: #c8c8c8d7;
+  border-color: #000000;
+  text-align: center;
 }
 
 .btnEnviar:hover { 
   background-color: #c8c8c8d7;
-  margin-left: 30px;
-  border-radius: 7px;
-  border-width: 3px;
   border-color: #000000;
   text-align: center;
-  width: 252px;
-  height: 57px;
-  margin-top: 50px;
-  font-weight:600;
-
 }
 
 .btnLogout{
@@ -227,6 +236,83 @@ h2 {
 }
 
 #spanIdErrorAdress{
+  font-weight: 1000;
+  text-size-adjust: 10px;
+  color: red;
+}
+
+#spanIdErrorDocument{
+  font-weight: 1000;
+  text-size-adjust: 10px;
+  color: red;
+}
+
+#spanIdErrorLoja{
+  font-weight: 1000;
+  text-size-adjust: 10px;
+  color: red;
+}
+
+#spanIdErrorQuantity{
+  font-weight: 1000;
+  text-size-adjust: 10px;
+  color: red;
+}
+
+#spanIdErrorLoja{
+  font-weight: 1000;
+  text-size-adjust: 10px;
+  color: red;
+}
+
+#spanIdErrorLoja{
+  font-weight: 1000;
+  text-size-adjust: 10px;
+  color: red;
+}
+
+#spanIdErrorLoja{
+  font-weight: 1000;
+  text-size-adjust: 10px;
+  color: red;
+}
+
+#spanIdErrorDate{
+  font-weight: 1000;
+  text-size-adjust: 10px;
+  color: red;
+}
+
+#spanIdErrorDescription{
+  font-weight: 1000;
+  text-size-adjust: 10px;
+  color: red;
+}
+
+#spanIdErrorPrice{
+  font-weight: 1000;
+  text-size-adjust: 10px;
+  color: red;
+}
+
+#spanIdErrorQunatity{
+  font-weight: 1000;
+  text-size-adjust: 10px;
+  color: red;
+}
+
+#spanIdErrorEmployee{
+  font-weight: 1000;
+  text-size-adjust: 10px;
+  color: red;
+}
+
+#spanIdErrorClient{
+  font-weight: 1000;
+  text-size-adjust: 10px;
+  color: red;
+}
+#spanIdErrorIceCream{
   font-weight: 1000;
   text-size-adjust: 10px;
   color: red;

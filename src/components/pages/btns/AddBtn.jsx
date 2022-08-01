@@ -7,7 +7,7 @@ export default class AddBtn extends Component {
 
     render() {
         return (
-            <button type="button" onClick={this.props.onClick} className="btn btn-outline-success"
+            <button type="button" className="btn btn-outline-success"
             onClick={this.props.onClick}>
                 Criar
             </button>

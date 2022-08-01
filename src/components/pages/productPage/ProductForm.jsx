@@ -28,42 +28,56 @@ export default class ProductForm extends Component {
         });
     }
     onSave = () => {
-        if (this.props.mode == 'edit') {
-            fetch("http://localhost:8080/webapp/rest/ice-cream/" + this.state.id,
-                {
-                    method: "PUT",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(this.state)
-                }).then(() => {
-                    this.clearState();
-                    this.props.toggleModal();
-                });
-            }else if (this.props.mode == 'AddEstoque') {
-                    fetch("http://localhost:8080/webapp/rest/ice-cream/addEstoque/" + this.state.id,
-                        {
-                            method: "PUT",
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify(this.state)
-                        }).then(() => {
-                            this.clearState();
-                            this.props.toggleModal();
-                        });
-            } else {
-            fetch("http://localhost:8080/webapp/rest/ice-cream",
-                {
-                    method: "POST",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(this.state)
-                }).then(() => {
-                    this.clearState();
-                    this.props.toggleModal();
-                });
+        document.getElementById("spanIdErrorName").textContent="";
+        document.getElementById("spanIdErrorDescription").textContent="";
+        document.getElementById("spanIdErrorPrice").textContent="";
+        document.getElementById("spanIdErrorQunatity").textContent="";
+        if(this.state.name == null || this.state.name.length <3){
+            document.getElementById("spanIdErrorName").textContent="* nome invalida";
+        }else if(this.state.desc == null || this.state.desc.length <= 20){
+            document.getElementById("spanIdErrorDescription").textContent="* descrição mais especificada";
+        }else if(this.state.price == null || this.state.price <= 0){
+            document.getElementById("spanIdErrorPrice").textContent="* campo invalido";
+        }else if(this.state.quantity == null || this.state.quantity <= 0){
+            document.getElementById("spanIdErrorQunatity").textContent="* campo invalido";
+        }else{
+            if (this.props.mode == 'edit') {
+                fetch("http://localhost:8080/webapp/rest/ice-cream/" + this.state.id,
+                    {
+                        method: "PUT",
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(this.state)
+                    }).then(() => {
+                        this.clearState();
+                        this.props.toggleModal();
+                    });
+                }else if (this.props.mode == 'AddEstoque') {
+                        fetch("http://localhost:8080/webapp/rest/ice-cream/addEstoque/" + this.state.id,
+                            {
+                                method: "PUT",
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(this.state)
+                            }).then(() => {
+                                this.clearState();
+                                this.props.toggleModal();
+                            });
+                } else {
+                fetch("http://localhost:8080/webapp/rest/ice-cream",
+                    {
+                        method: "POST",
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(this.state)
+                    }).then(() => {
+                        this.clearState();
+                        this.props.toggleModal();
+                    });
+            }
         }
     }
 
@@ -148,16 +162,16 @@ export default class ProductForm extends Component {
                             <label htmlFor="product-id">ID</label>
                             <input id="product-id" name="id" type="text" className="form-control" value={this.state.id} placeholder="#" onChange={this.handleInputChange} disabled />
 
-                            <label htmlFor="product-name">name</label>
+                            <label htmlFor="product-name">name <span id="spanIdErrorName"></span></label>
                             <input id="product-name" name="name" type="text" className="form-control" value={this.state.name} placeholder="name" onChange={this.handleInputChange} required />
 
-                            <label htmlFor="product-desc">Descrição</label>
+                            <label htmlFor="product-desc">Descrição <span id="spanIdErrorDescription"></span></label>
                             <input id="product-desc" name="desc" type="text" className="form-control" value={this.state.desc} placeholder="Sorvete de Limão" onChange={this.handleInputChange} required />
 
-                            <label htmlFor="product-price">preço</label>
+                            <label htmlFor="product-price">preço <span id="spanIdErrorPrice"></span></label>
                             <input id="product-price" name="price" type="number" step="0.01" className="form-control" value={this.state.price} placeholder="19.99" onChange={this.handleInputChange} required />
 
-                            <label htmlFor="product-quantity">quantidade</label>
+                            <label htmlFor="product-quantity">quantidade <span id="spanIdErrorQunatity"></span></label>
                             <input id="product-quantity" name="quantity" type="number" className="form-control" value={this.state.quantity} placeholder="1" onChange={this.handleInputChange} required />
         
                         </form>
@@ -179,16 +193,16 @@ export default class ProductForm extends Component {
                     <Modal.Body>
                         <form id="product-form">
 
-                        <label htmlFor="product-name">name</label>
+                        <label htmlFor="product-name">name <span id="spanIdErrorName"></span></label>
                             <input id="product-name" name="name" type="text" className="form-control" value={this.state.name} placeholder="Sorvete" onChange={this.handleInputChange} required disabled/>
 
-                            <label htmlFor="product-desc">Descrição</label>
+                            <label htmlFor="product-desc">Descrição <span id="spanIdErrorDescription"></span></label>
                             <input id="product-desc" name="desc" type="text" className="form-control" value={this.state.desc} placeholder="Sorvete de Limão" onChange={this.handleInputChange} required disabled/>
 
-                            <label htmlFor="product-price">preço</label>
+                            <label htmlFor="product-price">preço <span id="spanIdErrorPrice"></span></label>
                             <input id="product-price" name="price" type="number" step="0.01" className="form-control" value={this.state.price} placeholder="19.99" onChange={this.handleInputChange} required disabled/>
 
-                            <label htmlFor="product-quantity">quantidade</label>
+                            <label htmlFor="product-quantity">quantidade <span id="spanIdErrorQunatity"></span></label>
                             <input id="product-quantity" name="quantity" type="number" className="form-control" value={this.state.quantity} placeholder="1" onChange={this.handleInputChange} required disabled/>
 
                             <label htmlFor="product-quantityComprada">quantidade comprada</label>
@@ -213,16 +227,16 @@ export default class ProductForm extends Component {
                     <Modal.Body>
                         <form id="product-form">
 
-                        <label htmlFor="product-name">name</label>
+                        <label htmlFor="product-name">name <span id="spanIdErrorName"></span></label>
                             <input id="product-name" name="name" type="text" className="form-control" value={this.state.name} placeholder="Sorvete" onChange={this.handleInputChange} required />
 
-                            <label htmlFor="product-desc">Descrição</label>
+                            <label htmlFor="product-desc">Descrição <span id="spanIdErrorDescription"></span></label>
                             <input id="product-desc" name="desc" type="text" className="form-control" value={this.state.desc} placeholder="Sorvete de Limão" onChange={this.handleInputChange} required />
 
-                            <label htmlFor="product-price">preço</label>
+                            <label htmlFor="product-price">preço <span id="spanIdErrorPrice"></span></label>
                             <input id="product-price" name="price" type="number" step="0.01" className="form-control" value={this.state.price} placeholder="19.99" onChange={this.handleInputChange} required />
 
-                            <label htmlFor="product-quantity">quantidade</label>
+                            <label htmlFor="product-quantity">quantidade <span id="spanIdErrorQunatity"></span></label>
                             <input id="product-quantity" name="quantity" type="number" className="form-control" value={this.state.quantity} placeholder="1" onChange={this.handleInputChange} required />
 
                         </form>

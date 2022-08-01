@@ -67,7 +67,7 @@ export default class OrderListPage extends Component {
             <tr>
               <th scope="col">#</th>
               <th scope="col">ID do Funcionario</th>
-              <th scope="col">ID do Cliente</th>
+              <th scope="col">Nome do Cliente</th>
               <th scope="col">ID do Produto</th>
               <th scope="col">quantidade comprada</th>
               <th scope="col">preço por unidade</th>

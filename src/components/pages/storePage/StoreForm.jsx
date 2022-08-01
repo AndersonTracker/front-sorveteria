@@ -3,6 +3,7 @@ import Modal from 'react-bootstrap/Modal'
 import CancelBtn from '../btns/CancelBtn';
 import SaveBtn from '../btns/SaveBtn';
 import DeleteBtn from '../btns/DeleteBtn';
+import { IMaskInput } from "react-imask";
 
 export default class StoreForm extends Component {
     constructor(props) {
@@ -132,7 +133,7 @@ export default class StoreForm extends Component {
                             <input id="store-address" name="address" type="text" className="form-control" value={this.state.address} placeholder="Rua das Palmeiras, 123, Bairro X" onChange={this.handleInputChange} required disabled />
 
                             <label htmlFor="store-phone">Telefone </label>
-                            <input id="store-phone" name="phone" type="text" className="form-control" value={this.state.phone} placeholder="54123456789" maxLength="15" required onChange={this.handleInputChange} disabled />
+                            <IMaskInput  mask="(00) 0000-0000" id="store-phone" name="phone" type="text" className="form-control" value={this.state.phone} placeholder="54123456789" maxLength="15" required onChange={this.handleInputChange} disabled />
                         </form>
                     </Modal.Body>
 
@@ -161,7 +162,7 @@ export default class StoreForm extends Component {
                             <input id="store-address" name="address" type="text" className="form-control" value={this.state.address} placeholder="Rua das Palmeiras, 123, Bairro X" onChange={this.handleInputChange} required />
 
                             <label htmlFor="store-phone">Telefone <span id="spanIdError"> </span></label>
-                            <input id="store-phone" name="phone" type="text" className="form-control" value={this.state.phone} placeholder="54 99152-5151" maxLength="15" required onChange={this.handleInputChange} />
+                            <IMaskInput mask="(00) 0000-0000" id="store-phone" name="phone" type="text" className="form-control" value={this.state.phone} placeholder="54 99152-5151" maxLength="15" required onChange={this.handleInputChange} />
                         </form>
                     </Modal.Body>
 
@@ -187,7 +188,7 @@ export default class StoreForm extends Component {
                             <input id="store-address" name="address" type="text" className="form-control" value={this.state.address} placeholder="Rua das Palmeiras, 123, Bairro X" onChange={this.handleInputChange} required />
 
                             <label htmlFor="store-phone">Telefone <span id="spanIdError"> </span></label>
-                            <input id="store-phone" name="phone" type="text" className="form-control" value={this.state.phone} placeholder="(54) 9142-4343" maxLength="15" required onChange={this.handleInputChange} />
+                            <IMaskInput mask="(00) 0000-0000" id="store-phone" name="phone" type="text" className="form-control" value={this.state.phone} placeholder="(54)9142-4343" maxLength="15" required onChange={this.handleInputChange}/>
                         </form>
                     </Modal.Body>
 
