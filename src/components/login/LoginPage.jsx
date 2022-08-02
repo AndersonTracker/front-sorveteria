@@ -166,6 +166,8 @@ import {useHistory} from 'react-router-dom';
                                 <input className="btnEnviar" type="submit" value="Login"/>
                                 <p></p>
                         <input className="btnEnviarCreateUser" onClick={CadastrarNovoUser} value="Cadastrar novo usuario"/>
+                        <p></p>
+                        <spam className="resetSenha"><a href="">esqueci minha senha</a></spam>
                             </div> 
                         </form>
                     </div>

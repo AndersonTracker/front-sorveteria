@@ -1,50 +1,85 @@
 import React, { useState, useContext, useEffect} from 'react';
-import Context from '../../context/Context'; 
+import { IMaskInput } from "react-imask";
 import {useHistory} from 'react-router-dom';
+import { FiAlertTriangle } from "react-icons/fi";
     
     const CreateUser = () => {
     const [values, setValues] = useState(initialState);
+    const [user, setValueUser] = useState('');
+    const [password, setValuePassword] = useState('');
+    const [telefone, setTelefone] = useState('');
+    const [autorizado, setAutoriza] = useState(true);
+    const [valuesSuperPassword, setValuesSuperPassword] = useState('');
+    const [valuesSuperUser, setValuesSuperUser] = useState('');
     const History = useHistory();
 
     function initialState(){
         return {user: '',
-            password: ''}
+            password: '',
+            telefone: ''}
     }
 
-    function onChange(event) {
-        localStorage.setItem('user', JSON.stringify({name: event.target.value}));
-        const {value, name} = event.target;
-        setValues({
-            ...values,
-            [name]: value,
-        });
+    function handleInputChangePassword(event){
+        let target = event.target;
+        let value = target.value;
+        setValuePassword(value);
     }
 
-    function onChangePassword(event) {  
-        const {value, name} = event.target;
-        setValues({
-            ...values,
-            [name]: value,
-        });  
+    function handleInputChangeUser(event){
+        let target = event.target;
+        let value = target.value;
+        setValueUser(value);
     }
 
-    function onSubmit(event){
+    function handleInputChangeTelefone(event){
+        let target = event.target;
+        let value = target.value;
+        setTelefone(value);
+    }
+
+    function handleInputChangeSuperUser(event){
+        let target = event.target;
+        let value = target.value;
+        setValuesSuperUser(value);
+    }
+
+    function handleInputChangeSuperPassword(event) {
+        let target = event.target;
+        let value = target.value;
+        setValuesSuperPassword(value);
+    }
+
+    function isSuperUser(event){
         event.preventDefault();
-        onSave(values);
+        if(valuesSuperUser == "SuperAdmin" && valuesSuperPassword == "admin123"){
+            setAutoriza(false);
+            setValuesSuperPassword('');
+            setValuesSuperUser('');
+        }else{
+            setAutoriza(true);
+            setValuesSuperPassword('');
+        }
     }
-   
-    function onSave(user, password){
-            fetch("http://localhost:8080/webapp/rest/login",
+
+    function cadastrar(event){
+        event.preventDefault();
+        fetch("http://localhost:8080/webapp/rest/createUser",
                 {
                     method: "POST",
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(user, password)
-                }).then(response => {
-                    return response.json()
-                }).then(r => {
-                  });
+                    body: JSON.stringify({user, password, telefone})
+                }).then((response) => {
+                    if(response.status == 204){
+                        return History.push('/LoginPage');
+                    }else{
+                        throw new Error();
+                    }
+                }).catch((error) => {
+                    document.getElementById("isSuperAdminTrue").textContent="* Usuario ja existente";
+                    document.getElementById("isSuperAdminTrue").style.color = "red";
+                });
     }
 
     function Cancelar(){
@@ -56,38 +91,47 @@ import {useHistory} from 'react-router-dom';
 
         return (
             <>  
-            <div className="div-login">
+            <div className="div-login1">
                         <h1 className="titleLogin">cadastrar novo usuario</h1>
+                        <h2 className="titleLogin2"> <FiAlertTriangle/> para proseguir, é necessario a aprovação do SuperAdmin.</h2>
 
-                        <form onSubmit={onSubmit} autoComplete="nope">
-                                <div className="labelLogin2">
-                                    <label className="label1" htmlFor="email">Usuario</label>
-                                    <input className="inputLogin" id="email" type="text" name="user" autoComplete="off" onChange={onChange} value={values.user} required/>
-                                    <span>{}</span>
+                        <form onSubmit={isSuperUser} autoComplete="nope">
+                        <div className="labelLogin2">
+                                    <label className="label1" htmlFor="email"> Super Usuario</label>
+                                    <input className="inputLoginSuper" id="email" type="text" name="user" autoComplete="off" onChange={handleInputChangeSuperUser} value={valuesSuperUser} required/>
                                 </div>
-                                <div className="labelLogin2">
-                                    <label className="label2" htmlFor="password">Senha</label>
-                                    <input className="inputLogin" id="password" type="password" name="password" onChange={onChangePassword} value={values.password} required/>
-                                    <span>{}</span>
+                                <div className="PasswordSuper">
+                                    <label className="LabelPasswordSuper" htmlFor="password">Senha</label>
+                                    <input className="inputLoginSuper" id="password" type="password" name="password" onChange={handleInputChangeSuperPassword} value={valuesSuperPassword} required/>
                                 </div>
-                            <div className="labelLoginGroup">
+                                <input className="btnEnviar1" type="submit" value="Verificar"/>
+                        </form>
+    
+                        <form onSubmit={cadastrar} autoComplete="nope">
+                            <div className="labelLoginGroup1">
+                            {autorizado == false ? (<span id ="isSuperAdminTrue" className='isSuperAdminTrue' > cadastro autorizado.</span>): <spam className="isSuperAdmin">cadastro não autorizado</spam>}
                                 <div className="labelLogin1">
-                                    <label className="label1" htmlFor="email">Usuario</label>
-                                    <input className="inputLogin" id="email" type="text" name="user" autoComplete="off" onChange={onChange} value={values.user} required/>
+                                    <label className="labelCadastro" htmlFor="email">Usuario</label>
+                                    <input className="inputLoginCadastro" id="email" type="text" name="user" autoComplete="off" onChange={handleInputChangeUser} value={user} disabled={autorizado} required/>
                                     <span>{}</span>
                                 </div>
-                                <div className="labelLogin2">
-                                    <label className="label2" htmlFor="password">Senha</label>
-                                    <input className="inputLogin" id="password" type="password" name="password" onChange={onChangePassword} value={values.password} required/>
+                                <div className="">
+                                    <label className="labelCadastroPassword" htmlFor="password">Senha</label>
+                                    <input className="inputLoginCadastro" id="password" type="password" name="password" onChange={handleInputChangePassword} value={password} disabled={autorizado} required/>
                                     <span>{}</span>
                                 </div>
-                                <input className="btnEnviar" type="submit" value="Login"/>
-                                <p></p>
+                                <div className="">
+                                    <label className="labelCadastroTelefone" htmlFor="email">Telefone</label>
+                                    <IMaskInput mask="(00) 0000-0000" className="inputLoginCadastro" id="telefone" type="text" name="telefone" autoComplete="off" onChange={handleInputChangeTelefone} value={telefone} disabled={autorizado} required/>
+                                    <span>{}</span>
+                                </div>
+                                <input className="btnEnviarCadastrar" type="submit" value="Cadastrar" disabled={autorizado}/>
+                                
                                 <input className="btnEnviarCreateUser" onClick={Cancelar} type="submit" value="Cancelar"/>
                             </div>
                             
                         </form>
-                        </div>
+            </div>
             </>
         );
 }

@@ -49,18 +49,24 @@
 
 h1 {
   text-align: center; 
-  font-size: 70px; 
+  font-size: 55px; 
   margin: auto;
   color: rgb(0, 0, 0);
   padding: 0px;
 }
 
+.LabelPasswordSuper{
+  margin-left: 12.9%;
+  margin-right: 2%;
+}
+
 h2 {
-  text-align: center;
-  font-size: 40px;
-  margin: auto;
-  color: rgb(0, 0, 0);
-  padding: 0px;
+  text-align: left;
+  font-size: 15px;
+  margin-top: 2%;
+  color: rgb(134, 130, 0);
+  background-color: #ece9927d;
+  padding: 10px;
 }
 
 .header {
@@ -107,8 +113,18 @@ h2 {
 
 .div-login-body {
   background-image: linear-gradient(to bottom, #d80e0e91, rgba(68, 0, 124, 0.801));
-  margin-top: -2.3%;
+  margin-top: -3.2%;
   margin-left: 0px;
+}
+
+.div-login1{
+  margin-top: 6.5%;
+  background-color: #008cff2a;
+  width: 55%;
+  margin-left: 25%;
+  border-radius: 10px;
+  height: 830px;
+  padding-top: 40px;
 }
 
 .div-login{
@@ -121,9 +137,9 @@ h2 {
   padding-top: 40px;
 }
 
-.labelLoginGroup {
+.labelLoginGroup1 {
   font-size: 200%;
-  margin-top: 100px;
+  margin-top: 5%;
   text-align: center;
   font-weight: normal;
   font-weight: bold;
@@ -131,7 +147,7 @@ h2 {
 
 .labelLoginGroup {
   font-size: 200%;
-  margin-top: 100px;
+  margin-top: 13%;
   text-align: center;
 }
 
@@ -151,22 +167,101 @@ h2 {
 .inputLogin{
   color: #000000;
   background:#f5f5f5ce;
-  border-width: medium;
   border-style: solid;
   border-color: rgb(0, 0, 0);
-  border-radius: 10px;
+  border-radius: 5px;
+}
+
+.inputLoginSuper{
+  color: #000000;
+  background:#f5f5f5ce;
+  border-style: solid;
+  border-color: rgb(0, 0, 0);
+  border-radius: 5px;
+}
+
+.btnEnviar1{
+  background-color: #ffffffce;
+  margin-left: 25%;
+  border-radius: 5px;
+  border-width: 2px;
+  border-color: #000000;
+  text-align: center;
+  width: 150px;
+  font-weight:600;
 }
 
 .btnEnviar{
   background-color: #ffffffce;
   margin-left: 30px;
-  border-radius: 7px;
+  border-radius: 5px;
   border-width: 3px;
   border-color: #000000;
   text-align: center;
   width: 250px;
   margin-top: 20px;
   font-weight:600;
+}
+
+.labelCadastro{
+  font-size: 22px;
+  margin-right: 2%;
+}
+
+.labelCadastroPassword{
+  font-size: 22px;
+  margin-right: 4.7%;
+}
+
+.labelCadastroTelefone{
+  font-size: 22px;
+  margin-right: 1%;
+}
+
+.inputLoginCadastro{
+  color: #000000;
+  font-size: 25px;
+  background:#f5f5f5ce;
+  border-style: solid;
+  border-color: rgb(0, 0, 0);
+  border-radius: 5px;
+}
+
+.btnEnviarCadastrar{
+  font-size: 25px;
+  background-color: #ffffffce;
+  border-radius: 5px;
+  border-width: 2px;
+  border-color: #000000;
+  text-align: center;
+  margin-top: 2%;
+}
+
+.btnEnviarCadastrar:hover { 
+  background-color: #c8c8c8d7;
+  border-color: #000000;
+  text-align: center;
+}
+
+.isSuperAdminTrue{
+  font-size: 60%;
+  font-weight: 600;
+  font-style: oblique;
+  color: rgb(39, 182, 0);
+  margin-left: 50%;
+}
+
+.resetSenha{
+  margin-top: -100px;
+  font-size: 20px;
+}
+
+.isSuperAdmin{
+  font-size: 60%;
+  font-weight: 600;
+  font-style: oblique;
+  color: rgb(182, 0, 0);
+  margin-left: 50%;
 }
 
 .btnEnviarCreateUser{
