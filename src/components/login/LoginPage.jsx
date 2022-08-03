@@ -13,6 +13,35 @@ import {useHistory} from 'react-router-dom';
     const { setToken } = useContext(Context);
     const History = useHistory();
 
+    const [valuesSuperPassword, setValuesSuperPassword] = useState('');
+    const [valuesSuperUser, setValuesSuperUser] = useState('');
+
+    function handleInputChangeSuperUser(event){
+        let target = event.target;
+        let value = target.value;
+        setValuesSuperUser(value);
+    }
+
+    function handleInputChangeSuperPassword(event) {
+        let target = event.target;
+        let value = target.value;
+        setValuesSuperPassword(value);
+    }
+
+    function isSuperUser(event){
+        event.preventDefault();
+        if(valuesSuperUser == "SuperAdmin" && valuesSuperPassword == "admin123"){
+            setValuesSuperPassword('');
+            setValuesSuperUser('');
+            blocked(true);
+            var valor = 3;
+            localStorage.setItem('attempts', valor);
+            window.location.reload();
+        }else{
+            setValuesSuperPassword('');
+        }
+    }
+
     function login(usuario, senha, systemLocked){
         // teste
         if(localStorage.getItem('attempts') > 0){
@@ -22,7 +51,7 @@ import {useHistory} from 'react-router-dom';
                 localStorage.setItem('attempts', 3);
             }else{
                 if(localStorage.getItem('attempts') == 1){
-                    blocked();
+                    blocked(false);
                 }
                 if(usuario !== undefined && systemLocked === false){
                     setSpan("usuario bloqueado.");
@@ -30,9 +59,12 @@ import {useHistory} from 'react-router-dom';
                     var valor = localStorage.getItem('attempts');
                     valor--;
                     localStorage.setItem('attempts', valor);
+                    
                     {valor === 0 ? (
                     setSpan("sistema bloqueado.")
                     ): setSpan("login invalido, tentativas: " + localStorage.getItem('attempts') + ".");}
+                    {valor === 0 ? (window.location.reload()
+                        ): setSpan("login invalido, tentativas: " + localStorage.getItem('attempts') + ".");}
                 }
             }
         }
@@ -85,7 +117,9 @@ import {useHistory} from 'react-router-dom';
     }
    
     function onSave(user, password){
+        console.log("onsave");
         if(localStorage.getItem('attempts') > 0 && block == true){
+            console.log("dentro do if onsave");
             fetch("http://localhost:8080/webapp/rest/login",
                 {
                     method: "POST",
@@ -103,14 +137,14 @@ import {useHistory} from 'react-router-dom';
         }
     }
 
-    function blocked(){
+    function blocked(sistema){
             fetch("http://localhost:8080/webapp/rest/login",
             {
                 method: "PUT",
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify()
+                body: JSON.stringify({["systemLocked"]: sistema})
             })
     }
     
@@ -150,6 +184,20 @@ import {useHistory} from 'react-router-dom';
                         {block === true ? (
                         <span className="spanStatus">sistema em funcionamento.</span>
                     ): <span className="spanStatusBlock">sistema bloqueado.</span>}
+                    {block === false ? (
+                        <form onSubmit={isSuperUser} autoComplete="nope">
+                        <div className="labelLogin2">
+                                    <label className="label1" htmlFor="email"> Super Usuario</label>
+                                    <input className="inputLoginSuper" id="email" type="text" name="user" autoComplete="off" onChange={handleInputChangeSuperUser} value={valuesSuperUser} required/>
+                                </div>
+                                <div className="PasswordSuper">
+                                    <label className="LabelPasswordSuper" htmlFor="password">Senha</label>
+                                    <input className="inputLoginSuper" id="password" type="password" onChange={handleInputChangeSuperPassword} value={valuesSuperPassword} name="password" required/>
+                                </div>
+                                <input className="btnDesbloquearSistema" type="submit" value="Desbloquear Sistema"/>
+                        </form>
+                        ): <span></span>
+                    }
                         <form onSubmit={onSubmit} autoComplete="nope">
                             <div className="labelLoginGroup">
                                 <span className="spanLogin">{span}</span>

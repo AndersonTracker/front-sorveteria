@@ -191,6 +191,23 @@ h2 {
   font-weight:600;
 }
 
+.btnDesbloquearSistema{
+  background-color: #ffffffce;
+  margin-left: 25%;
+  border-radius: 5px;
+  border-width: 2px;
+  border-color: #000000;
+  text-align: center;
+  width: 167px;
+  font-weight:600;
+}
+
+.btnDesbloquearSistema:hover { 
+  background-color: #c8c8c8d7;
+  border-color: #000000;
+  text-align: center;
+}
+
 .btnEnviar{
   background-color: #ffffffce;
   margin-left: 30px;
