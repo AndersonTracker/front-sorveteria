@@ -159,7 +159,7 @@ export default class ClientForm extends Component {
                             <IMaskInput mask="000.000.000-00" id="client-document" name="document" type="text" className="form-control" value={this.state.document} placeholder="000.000.000-00" maxLength="14" onChange={this.handleInputChange} required/>
                             
                             <label htmlFor="client-phone">Telefone <span id="spanIdError"></span></label>
-                            <IMaskInput mask="(00) 0000-0000" id="client-phone" name="phone" type="text" className="form-control" value={this.state.phone} placeholder="(54) 9 0000-0000" maxLength="16" required onChange={this.handleInputChange}/>
+                            <IMaskInput mask="(00)00000-0000" id="client-phone" name="phone" type="text" className="form-control" value={this.state.phone} placeholder="(54) 9 0000-0000" maxLength="16" required onChange={this.handleInputChange}/>
 
                             <label htmlFor="client-birth_date">data nascimento <span id="spanIdErrorDate"></span></label>
                             <IMaskInput mask="00/00/0000" id="client-birth_date" name="birth_date" type="text" className="form-control" value={this.state.birth_date} placeholder="dd/mm/aaaa" maxLength="10" required onChange={this.handleInputChange}/>
@@ -192,7 +192,7 @@ export default class ClientForm extends Component {
                             <IMaskInput mask="000.000.000-00" id="client-document" name="document" type="text" className="form-control" value={this.state.document} placeholder="000.000.000-00" maxLength="14" required onChange={this.handleInputChange}/>
 
                             <label htmlFor="client-phone">Telefone <span id="spanIdError"></span></label>
-                            <IMaskInput mask="(00) 0000-0000" id="client-phone" name="phone" type="text" className="form-control" value={this.state.phone} placeholder="(54) 9 9100-0000" maxLength="16" required onChange={this.handleInputChange}/>
+                            <IMaskInput mask="(00)00000-0000" id="client-phone" name="phone" type="text" className="form-control" value={this.state.phone} placeholder="(54) 9 9100-0000" maxLength="16" required onChange={this.handleInputChange}/>
 
                             <label htmlFor="client-birth_date">data nascimento <span id="spanIdErrorDate"></span></label>
                             <IMaskInput mask="00/00/0000" id="client-birth_date" name="birth_date" type="text" className="form-control" value={this.state.birth_date} placeholder="dd/mm/aaaa" maxLength="10" required onChange={this.handleInputChange}/>

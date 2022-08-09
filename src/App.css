@@ -208,6 +208,21 @@ h2 {
   text-align: center;
 }
 
+.resetSenhaForm{
+  margin-top: 15%;
+}
+
+.card{
+  margin-top: -11%;
+  margin-left: 55%;
+  display: block;
+  width: 40%;
+}
+
+.resetSenhaFormNovaSenha{
+  margin-top: 2%;
+}
+
 .btnEnviar{
   background-color: #ffffffce;
   margin-left: 30px;

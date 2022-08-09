@@ -13,6 +13,7 @@ import Footer from './components/footer/Footer';
 import HomePageAfterLogin from './components/pages/homePage/HomePageAfterLogin';
 import MenuMenu from './components/menu/MenuMenu';
 import CreateUser from './components/login/createUser/CreateUser';
+import ResetSenha from './components/login/resetSenha/ResetSenha';
 
 export default class App extends Component {
   
@@ -34,6 +35,7 @@ export default class App extends Component {
             <Route exact path="/LoginPage" component={LoginPage}/>
             <RoutePrivate exact path="/home" component={MenuMenu}/>
             <Route exact path="/newUser" component={CreateUser}/>
+            <Route exact path="/ResetSenha" component={ResetSenha}/>
             <Route path="" component={NotFounder}/>
           </Switch>
           <Footer />

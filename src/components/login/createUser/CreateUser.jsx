@@ -4,7 +4,6 @@ import {useHistory} from 'react-router-dom';
 import { FiAlertTriangle } from "react-icons/fi";
     
     const CreateUser = () => {
-    const [values, setValues] = useState(initialState);
     const [user, setValueUser] = useState('');
     const [password, setValuePassword] = useState('');
     const [telefone, setTelefone] = useState('');
@@ -122,7 +121,7 @@ import { FiAlertTriangle } from "react-icons/fi";
                                 </div>
                                 <div className="">
                                     <label className="labelCadastroTelefone" htmlFor="email">Telefone</label>
-                                    <IMaskInput mask="(00) 0000-0000" className="inputLoginCadastro" id="telefone" type="text" name="telefone" autoComplete="off" onChange={handleInputChangeTelefone} value={telefone} disabled={autorizado} required/>
+                                    <IMaskInput mask="(00)00000-0000" className="inputLoginCadastro" id="telefone" type="text" name="telefone" autoComplete="off" onChange={handleInputChangeTelefone} value={telefone} disabled={autorizado} required/>
                                     <span>{}</span>
                                 </div>
                                 <input className="btnEnviarCadastrar" type="submit" value="Cadastrar" disabled={autorizado}/>
